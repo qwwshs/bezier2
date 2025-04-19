@@ -323,18 +323,19 @@ function love.update(dt)
                     bezier.trans = loadstring([[return {]]..table.concat( trans, ", ", 1,math.floor(#trans / 2) *2  )..[[}]])()
                 end
             end
+            if now_type:get() == 'bezier' then
+                --add sub
+                if ui:button("add") then
+                    table.insert( bezier.trans,0.5)
+                    table.insert( bezier.trans,0.5)
+                    strings_trans:update()
+                    end
 
-            --add sub
-            if ui:button("add") then
-                table.insert( bezier.trans,0.5)
-                table.insert( bezier.trans,0.5)
-                strings_trans:update()
-            end
-
-            if ui:button("sub") and #bezier.trans > 2 then
-                table.remove( bezier.trans, #bezier.trans )
-                table.remove( bezier.trans, #bezier.trans )
-                strings_trans:update()
+                if ui:button("sub") and #bezier.trans > 2 then
+                    table.remove( bezier.trans, #bezier.trans )
+                    table.remove( bezier.trans, #bezier.trans )
+                    strings_trans:update()
+                end
             end
         end
         ui:windowEnd()
